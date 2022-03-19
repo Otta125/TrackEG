@@ -5,9 +5,16 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
+    <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
 
     <color name="transparent_white">#00ffffff</color>
+    <color name="txt_bold_color">#060606</color>
+    <color name="txt_regular_color">#6A6565</color>
+    <color name="frame_color_for_email_edittxt">#D8D8D8</color>
+    <color name="forgot_pass_color">#1776F1</color>
+    <color name="remember_me_swich_color">#1776F1</color>
+    <color name="edit_txt_hint_color">#D8D8D8</color>
+    <color name="or_color">#92E8CD</color>
 
 </resources>

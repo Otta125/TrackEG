@@ -1,0 +1,18 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/forgot_pass_color</item>
+        <item name="colorPrimaryDark">@color/forgot_pass_color</item>
+        <item name="colorAccent">@color/forgot_pass_color</item>
+
+    </style>
+
+    <style name="TransparentDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">@color/transparent_white</item>
+    </style>
+    <style name="Color1SwitchStyle">
+        <item name="colorControlActivated">@color/remember_me_swich_color</item>
+    </style>
+
+</resources>
