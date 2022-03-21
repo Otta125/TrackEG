@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -15,6 +16,25 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <com.trackeg.trackegapps.Utilities.MyTextViewBold
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="@string/trackeg"
+                android:textColor="@color/txt_bold_color"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:maxHeight="200dp"
+                android:scaleType="fitCenter"
+                android:layout_marginStart="20dp"
+                android:scaleX="2"
+                android:scaleY="2"
+                android:src="@drawable/new_car" />
 
 
             <LinearLayout
@@ -25,69 +45,163 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
+                <com.trackeg.trackegapps.Utilities.MyTextViewBold
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="20dp"
+                    android:text="Sign in"
+                    android:textColor="@color/txt_bold_color"
+                    android:textSize="30sp" />
+
+                <com.trackeg.trackegapps.Utilities.MyTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:text="Use your verified email &amp; password to login into our system."
+
+                    android:textColor="@color/txt_regular_color"
+                    android:textSize="16sp" />
+
                 <EditText
-                    android:id="@+id/edtEmail"
+                    android:id="@+id/emailTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
+                    android:background="@drawable/frame_for_email_edittxt"
                     android:gravity="start"
-                    android:hint="Email"
+                    android:hint="@string/email"
                     android:inputType="textEmailAddress"
-                    android:padding="10dp"
-                    android:paddingEnd="15dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-               />
+                    android:padding="15dp"
+                    android:textColorHint="@color/edit_txt_hint_color"
+                    android:textColor="@color/black"
+                     android:textSize="16sp" />
 
                 <EditText
-                    android:id="@+id/edtPassword"
+                    android:id="@+id/passwordTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-
+                    android:background="@drawable/frame_for_email_edittxt"
                     android:gravity="start"
-                    android:hint="Password"
+                    android:hint="@string/password"
                     android:inputType="textPassword|textNoSuggestions"
-                    android:padding="10dp"
-                    android:paddingEnd="15dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                  />
+                    android:padding="15dp"
+
+                    android:textColorHint="@color/edit_txt_hint_color"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <TableLayout
+                    android:id="@+id/lyRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:stretchColumns="*">
+
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center">
+
+                        <LinearLayout
+                            android:id="@+id/swich"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/switch1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:checked="false"
+                                android:layoutDirection="rtl"
+                                android:scrollbarStyle="outsideInset"
+                                android:thumb="@drawable/custom_thumb"
+                                app:track="@drawable/custom_track" />
+
+                            <com.trackeg.trackegapps.Utilities.MyTextView
+                                android:id="@+id/tvRegister"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:background="?selectableItemBackground"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:text="@string/remember_me"
+                                android:textColor="@color/txt_bold_color"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+
+                        <com.trackeg.trackegapps.Utilities.MyTextView
+                            android:id="@+id/forgotPasswordTxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:background="?selectableItemBackground"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="@string/forgot_password"
+                            android:textColor="@color/forgot_pass_color"
+                            android:textSize="14sp" />
+                    </TableRow>
+                </TableLayout>
 
                 <Button
-                    android:id="@+id/btnLogin"
+                    android:id="@+id/loginBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
-
+                    android:background="@drawable/login_btn_shape"
                     android:gravity="center"
-                    android:text="Login"
+                    android:padding="15dp"
+                    android:text="@string/sign_in"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
+
+                <com.trackeg.trackegapps.Utilities.MyTextViewBold
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/or_you_can_get_in_with"
+                    android:textColor="@color/or_color"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:id="@+id/loginGoogleLin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/frame_for_email_edittxt"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_google_logo" />
+
+                    <com.trackeg.trackegapps.Utilities.MyTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/google_id"
+                        android:textColor="@color/txt_bold_color"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
+
     </ScrollView>
-
-
-    <FrameLayout
-        android:id="@+id/loading_frame"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:visibility="gone" >
-        <View
-            android:id="@+id/viewv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:background="#CC333333"
-            />
-        <ProgressBar
-            android:id="@+id/progress_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-    </FrameLayout>
-
 </FrameLayout>

@@ -1,9 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">TrackEG</string>
     <string name="trackeg">TrackEG</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="forgot_password"><u>forgot password ?</u></string>
+    <string name="forgot_password">Forgot Password</string>
     <string name="remember_me">Remember me</string>
     <string name="sign_in">Sign in</string>
     <string name="or_you_can_get_in_with">Or you can get in with</string>
@@ -12,8 +12,4 @@
     <string name="something_wrong">There is something wrong please try again</string>
     <string name="forgot_passwords">Forgot Password</string>
     <string name="enter_the_email">Enter the email associated with your account and we’ll send an email with instructions to reset your password.</string>
-<!--        <string name="default_web_client_id" translatable="false">
-            410105365548-rt81bql10p5dafiupv4j3j7ljre3e08q.apps.googleusercontent.com</string>-->
-
-
 </resources>

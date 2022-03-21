@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "410105365548",
+    "project_id": "project-4741046632203785095",
+    "storage_bucket": "project-4741046632203785095.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410105365548:android:03edd02ae0157a16",
+        "android_client_info": {
+          "package_name": "com.example.mahmoudmostafa.loginwithgoogle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410105365548-rt81bql10p5dafiupv4j3j7ljre3e08q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8twfLEsgl_OXBXQHR3Z0y5nhh7Fj-VvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410105365548-pt9fu7tkgb8fhp5r82gdpolpebap96fs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410105365548:android:c0818982f9629c8fe83d89",
+        "android_client_info": {
+          "package_name": "com.trackeg.trackegapps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410105365548-rt81bql10p5dafiupv4j3j7ljre3e08q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8twfLEsgl_OXBXQHR3Z0y5nhh7Fj-VvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410105365548-pt9fu7tkgb8fhp5r82gdpolpebap96fs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
