@@ -3,8 +3,6 @@ package com.trackeg.trackegapps.viewmodel
 import android.app.Activity
 import android.content.Intent
 import android.util.Log
-import android.widget.Toast
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -13,21 +11,24 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.trackeg.trackegapps.MainActivity
+import com.otherlogic.pregokotlin.API.RetrofitClient
 import com.trackeg.trackegapps.R
-import com.trackeg.trackegapps.Utilities.Const.RC_SIGN_IN
+import com.trackeg.trackegapps.model.data.login.ApiResponse
 import com.trackeg.trackegapps.model.data.login.LoginResponse
+import com.trackeg.trackegapps.model.data.login.User
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class LoginWithGoogleViewModel : ViewModel() {
     var loginGoogleMutableLiveData: MutableLiveData<GoogleSignInAccount> = MutableLiveData()
-    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    var addAccountGoogleMutableLiveData: MutableLiveData<ApiResponse> = MutableLiveData()
+    lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var firebaseAuth: FirebaseAuth
     private var signInIntent: Intent? = null
+    private lateinit var apiResponse: ApiResponse
 
     fun loginWithGoogle(activity: Activity) {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -38,7 +39,30 @@ class LoginWithGoogleViewModel : ViewModel() {
 
         firebaseAuth = FirebaseAuth.getInstance()
         signInIntent = mGoogleSignInClient.signInIntent
+    }
 
+    fun addAccountGoogle(userEmail: String, userPassword: String) {
+        val call: Call<LoginResponse?>? = RetrofitClient.instance.addAccountGoogle(
+            User(userEmail, userPassword)
+        )
+        call?.enqueue(object : Callback<LoginResponse?> {
+            override fun onResponse(
+                call: Call<LoginResponse?>,
+                response: Response<LoginResponse?>
+            ) {
+                if (response.body() != null) {
+                    apiResponse = ApiResponse()
+                    apiResponse.setlogin(response.body())
+                    addAccountGoogleMutableLiveData.postValue(apiResponse)
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse?>, t: Throwable) {
+                apiResponse = ApiResponse()
+                apiResponse.setError(t)
+                addAccountGoogleMutableLiveData.postValue(apiResponse)
+            }
+        })
     }
 
     fun handleResult(completedTask: Task<GoogleSignInAccount>) {
@@ -60,10 +84,12 @@ class LoginWithGoogleViewModel : ViewModel() {
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 loginGoogleMutableLiveData.value = account
-                /*Log.e("ID", account.id.toString())
-                 Log.e("displayName", account.displayName.toString())
-                 Log.e("idToken", account.idToken.toString())
-                 Log.e("email", account.email.toString())*/
+                Log.e("ID", account.id.toString())
+                Log.e("displayName", account.displayName.toString())
+                Log.e("idToken", account.idToken.toString())
+                Log.e("email", account.email.toString())
+                Log.e("acc", account.toString())
+
             }
         }
     }

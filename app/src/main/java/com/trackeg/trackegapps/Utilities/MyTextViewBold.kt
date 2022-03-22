@@ -31,14 +31,20 @@ class MyTextViewBold : AppCompatTextView {
     }
 
     private fun init() {
-        if (!isInEditMode()) {
-            if (languge == "ar") {
-                val tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/.ttf")
-                setTypeface(tf)
-            } else {
-                val tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/.ttf")
-                setTypeface(tf)
+        try {
+        if (!isInEditMode) {
+
+                typeface = if (languge == "ar") {
+                    val tf = Typeface.createFromAsset(context.assets, "fonts/kufi.ttf")
+                    tf
+                } else {
+                    val tf = Typeface.createFromAsset(context.assets, "fonts/kufi.ttf")
+                    tf
+                }
             }
+        }catch (e:ExceptionInInitializerError){
+
         }
+
     }
 }

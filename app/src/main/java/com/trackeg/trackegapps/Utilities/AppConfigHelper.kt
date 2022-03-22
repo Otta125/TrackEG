@@ -7,6 +7,9 @@ import android.graphics.Point
 import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
+import com.trackeg.trackegapps.UI.Login.LoginActivity
 
 class AppConfigHelper {
     companion object {
@@ -47,7 +50,11 @@ class AppConfigHelper {
             }
         }
 
-        fun gotoActivityFinish(activity: Activity,cls: Class<*>?,isFinishCuurentActivity: Boolean) {
+        fun gotoActivityFinish(
+            activity: Activity,
+            cls: Class<*>?,
+            isFinishCuurentActivity: Boolean
+        ) {
             try {
                 val objIntent = Intent(activity, cls)
                 objIntent.flags =
@@ -60,12 +67,23 @@ class AppConfigHelper {
                 ex.printStackTrace()
             }
         }
+
         fun isValid(text: String?): Boolean {
             return if (text != null) {
                 text != "" && !TextUtils.isEmpty(text) && text.isNotEmpty()
             } else {
                 false
             }
+        }
+
+        fun View.snackbar(message: String, action: (() -> Unit)? = null) {
+            val snackbar = Snackbar.make(this, message, Snackbar.LENGTH_LONG)
+            action?.let {
+                snackbar.setAction("Retry") {
+                    it()
+                }
+            }
+            snackbar.show()
         }
     }
 }

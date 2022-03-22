@@ -12,4 +12,8 @@
     <string name="something_wrong">There is something wrong please try again</string>
     <string name="forgot_passwords">Forgot Password</string>
     <string name="enter_the_email">Enter the email associated with your account and we’ll send an email with instructions to reset your password.</string>
+    <string name="try_again">There is something wrong,please try again</string>
+    <string name="enter_mail">Please, Enter a valid email</string>
+    <string name="enter_password">Please, Enter Your Password</string>
+    <string name="enter_valid_data">Please,Enter a valid data</string>
 </resources>

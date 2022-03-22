@@ -12,8 +12,12 @@
     <string name="something_wrong">There is something wrong please try again</string>
     <string name="forgot_passwords">Forgot Password</string>
     <string name="enter_the_email">Enter the email associated with your account and we’ll send an email with instructions to reset your password.</string>
-<!--        <string name="default_web_client_id" translatable="false">
-            410105365548-rt81bql10p5dafiupv4j3j7ljre3e08q.apps.googleusercontent.com</string>-->
+    <string name="try_again">There is something wrong,please try again</string>
+    <string name="enter_mail">Please, Enter a valid email</string>
+    <string name="enter_password">Please, Enter Your Password</string>
+    <string name="enter_valid_data">Please,Enter a valid data</string>
+    <!--        <string name="default_web_client_id" translatable="false">
+                410105365548-rt81bql10p5dafiupv4j3j7ljre3e08q.apps.googleusercontent.com</string>-->
 
 
 </resources>

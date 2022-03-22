@@ -33,10 +33,10 @@ class MyTextView : AppCompatTextView {
     private fun init() {
         if (!isInEditMode) {
             typeface = if (languge == "ar") {
-                val tf = Typeface.createFromAsset(context.assets, "fonts/.ttf")
+                val tf = Typeface.createFromAsset(context.assets, "fonts/kufi.ttf")
                 tf
             } else {
-                val tf = Typeface.createFromAsset(context.assets, "fonts/.ttf")
+                val tf = Typeface.createFromAsset(context.assets, "fonts/kufi.ttf")
                 tf
             }
         }

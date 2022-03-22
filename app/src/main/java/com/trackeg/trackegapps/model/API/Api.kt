@@ -17,4 +17,7 @@ interface Api {
 
     @POST("account/login")
     fun userLogin(@Body body: User): Call<LoginResponse?>?
+
+    @POST("account/login")
+    fun addAccountGoogle(@Body body: User): Call<LoginResponse?>?
 }
