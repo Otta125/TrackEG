@@ -17,7 +17,9 @@ import com.trackeg.trackegapps.Utilities.AppConfigHelper.Companion.isValid
 import com.trackeg.trackegapps.Utilities.Const.ARABIC_LANGUAGE
 import com.trackeg.trackegapps.Utilities.Const.ENGLISH_LANGUAGE
 import com.trackeg.trackegapps.Utilities.Const.SHARED_PREFERENCE_LANGUAGE_KEY
+import com.trackeg.trackegapps.Utilities.Const.SHARED_PREFERENCE_USER_IS_LOGGED_KEY
 import com.trackeg.trackegapps.Utilities.SharedPrefHelper
+import com.trackeg.trackegapps.Utilities.SharedPrefHelper.Companion.getSharedBoolean
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,44 +29,70 @@ class SplashActivity : AppCompatActivity() {
             getLocalLanguage()
         }, 1500)
     }
+
     @SuppressLint("ObsoleteSdkInt")
     private fun getLocalLanguage() {
         try {
-            val language: String = SharedPrefHelper.getSharedString(this@SplashActivity, SHARED_PREFERENCE_LANGUAGE_KEY).toString()
+            val language: String = SharedPrefHelper.getSharedString(
+                this@SplashActivity,
+                SHARED_PREFERENCE_LANGUAGE_KEY
+            ).toString()
             if (isValid(language)) {
                 if (language == ENGLISH_LANGUAGE) {
-                    SharedPrefHelper.setSharedString(this@SplashActivity,SHARED_PREFERENCE_LANGUAGE_KEY,ENGLISH_LANGUAGE)
+                    SharedPrefHelper.setSharedString(
+                        this@SplashActivity,
+                        SHARED_PREFERENCE_LANGUAGE_KEY,
+                        ENGLISH_LANGUAGE
+                    )
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
                     }
                 } else {
                     SharedPrefHelper.setSharedString(
-                        this@SplashActivity, SHARED_PREFERENCE_LANGUAGE_KEY,ARABIC_LANGUAGE )
+                        this@SplashActivity, SHARED_PREFERENCE_LANGUAGE_KEY, ARABIC_LANGUAGE
+                    )
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
                     }
                 }
             } else {
                 //start with the default language of the  device
-                val language: String =ConfigurationCompat.getLocales(Resources.getSystem().configuration).toString().substring(1, 3)
+                val language: String =
+                    ConfigurationCompat.getLocales(Resources.getSystem().configuration).toString()
+                        .substring(1, 3)
                 if (language.contains(ENGLISH_LANGUAGE)) {
-                    SharedPrefHelper.setSharedString(this@SplashActivity,SHARED_PREFERENCE_LANGUAGE_KEY,ENGLISH_LANGUAGE)
+                    SharedPrefHelper.setSharedString(
+                        this@SplashActivity,
+                        SHARED_PREFERENCE_LANGUAGE_KEY,
+                        ENGLISH_LANGUAGE
+                    )
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_LTR
                     }
                 } else {
-                    SharedPrefHelper.setSharedString( this@SplashActivity,SHARED_PREFERENCE_LANGUAGE_KEY, ARABIC_LANGUAGE )
+                    SharedPrefHelper.setSharedString(
+                        this@SplashActivity,
+                        SHARED_PREFERENCE_LANGUAGE_KEY,
+                        ARABIC_LANGUAGE
+                    )
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                         window.decorView.layoutDirection = View.LAYOUT_DIRECTION_RTL
                     }
                 }
             }
-            start_Activity()
+            startActivity()
         } catch (objException: Exception) {
             objException.printStackTrace()
         }
     }
-    private fun start_Activity() {
-        AppConfigHelper.gotoActivityFinish(this, LoginActivity::class.java, true)
+
+    private fun startActivity() {
+        if (getSharedBoolean(this, SHARED_PREFERENCE_USER_IS_LOGGED_KEY)) {
+            AppConfigHelper.gotoActivityFinish(this, MainActivity::class.java, true)
+
+        } else {
+            AppConfigHelper.gotoActivityFinish(this, LoginActivity::class.java, true)
+
+        }
     }
 }

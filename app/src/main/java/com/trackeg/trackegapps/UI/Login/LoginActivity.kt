@@ -3,6 +3,7 @@ package com.trackeg.trackegapps.UI.Login
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -13,10 +14,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.tasks.Task
+import com.trackeg.trackegapps.MainActivity
 import com.trackeg.trackegapps.R
 import com.trackeg.trackegapps.UI.ForgotPasswordActivity
 import com.trackeg.trackegapps.Utilities.AppConfigHelper
+import com.trackeg.trackegapps.Utilities.AppConfigHelper.Companion.gotoActivityFinish
+import com.trackeg.trackegapps.Utilities.Const.SHARED_PREFERENCE_USER_OBJECT_KEY
 import com.trackeg.trackegapps.Utilities.LoadingDialog
+import com.trackeg.trackegapps.Utilities.SharedPrefHelper
 import com.trackeg.trackegapps.model.data.login.ApiResponse
 import com.trackeg.trackegapps.viewmodel.LoginViewModel
 import com.trackeg.trackegapps.viewmodel.LoginWithGoogleViewModel
@@ -28,8 +33,7 @@ class LoginActivity : AppCompatActivity() {
     private var loginWithGoogleViewModel: LoginWithGoogleViewModel? = null
     private var loadingDialog: LoadingDialog? = null
     private lateinit var mGoogleSignInClient: GoogleSignInClient
-    var emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
-    var login = true
+
 
     // get result of google sign in SDK
     private val resultLauncher =
@@ -55,26 +59,7 @@ class LoginActivity : AppCompatActivity() {
         loginWithGoogleViewModel = ViewModelProvider(this).get(LoginWithGoogleViewModel::class.java)
 
         loginBtn?.setOnClickListener(View.OnClickListener {
-            if (emailTxt?.text?.isEmpty()!! ||
-                !emailTxt?.text?.matches(emailPattern)!! ||
-                passwordTxt?.text?.isEmpty()!!
-            ) {
-                login = false
-                Toast.makeText(
-                    this@LoginActivity,
-                    getString(R.string.enter_valid_data),
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                login = true
-            }
-
-            if (login) {
-                //start loading dialog
-                loadingDialog?.startLoadingDialog()
-                //call login function in viewModel
-                loginViewModel!!.login(emailTxt?.text.toString(), passwordTxt?.text.toString())
-            }
+            loginViewModel!!.login(emailTxt?.text.toString(), passwordTxt?.text.toString())
         })
 
         loginGoogleLin?.setOnClickListener(View.OnClickListener {
@@ -90,25 +75,23 @@ class LoginActivity : AppCompatActivity() {
         //make observer on data changed
         loginViewModel!!.loginMutableLiveData.observe(this,
             Observer<ApiResponse> { apiResponse ->
-                loadingDialog?.dissmissDialog()
-                if (apiResponse == null) {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        getString(R.string.try_again),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@Observer
+                if (apiResponse.isLoading()) {
+                    loadingDialog?.startLoadingDialog()
+                } else {
+                    loadingDialog?.dissmissDialog()
                 }
-                if (apiResponse.getError() == null) {
+
+                if (apiResponse.getResponse()?.status!!) {
+                    //Start main activity
+                      gotoActivityFinish(this,
+                          MainActivity::class.java ,
+                          true)
+                } else {
+                    if (apiResponse.getResponse()?.description?.isNotEmpty()!!)
+
                     Toast.makeText(
                         this@LoginActivity,
                         apiResponse.getResponse()?.description,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        apiResponse.getError()?.localizedMessage.toString(),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

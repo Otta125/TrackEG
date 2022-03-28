@@ -91,7 +91,7 @@ class SharedPrefHelper {
         }
 
         //get saved object
-        fun <T> getSharedOBJECT(context: Context, key: String?, type: T): Any? {
+        fun <T> getSharedObject(context: Context, key: String?, type: T): Any? {
             val sharedPreferences = context.getSharedPreferences(
                 context.packageName,
                 Context.MODE_PRIVATE
@@ -120,7 +120,7 @@ class SharedPrefHelper {
         }*/
 
         // Save object
-        fun setSharedOBJECT(context: Context, key: String?, value: Any?) {
+        fun setSharedObject(context: Context, key: String?, value: Any?) {
             val sharedPreferences =
                 context.getSharedPreferences(context.packageName, Context.MODE_PRIVATE)
             val prefsEditor = sharedPreferences.edit()
