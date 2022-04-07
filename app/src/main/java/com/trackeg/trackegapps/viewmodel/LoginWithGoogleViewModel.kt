@@ -41,7 +41,7 @@ class LoginWithGoogleViewModel : ViewModel() {
         signInIntent = mGoogleSignInClient.signInIntent
     }
 
-    fun addAccountGoogle(userEmail: String, userPassword: String) {
+/*    fun addAccountGoogle(userEmail: String, userPassword: String) {
         val call: Call<LoginResponse?>? = RetrofitClient.instance.addAccountGoogle(
             User(userEmail, userPassword)
         )
@@ -63,7 +63,7 @@ class LoginWithGoogleViewModel : ViewModel() {
                 addAccountGoogleMutableLiveData.postValue(apiResponse)
             }
         })
-    }
+    }*/
 
     fun handleResult(completedTask: Task<GoogleSignInAccount>) {
         try {

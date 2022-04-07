@@ -9,16 +9,16 @@ import com.trackeg.trackegapps.Utilities.SharedPrefHelper.Companion.getSharedObj
 import com.trackeg.trackegapps.model.data.login.ApiResponse
 
 class MainActivity : AppCompatActivity() {
-    var apiResponse: ApiResponse? = ApiResponse()
-    var apiResponseForSharedPreference: ApiResponse? = ApiResponse()
+    //var apiResponse: ApiResponse? = ApiResponse()
+   // var apiResponseForSharedPreference: ApiResponse? = ApiResponse()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        apiResponse = getSharedObject(
+     /*   apiResponse = getSharedObject(
             this,
             SHARED_PREFERENCE_USER_OBJECT_KEY,
             apiResponseForSharedPreference
-        ) as ApiResponse
+        ) as ApiResponse*/
 
       //  Log.e("GFGFG", apiResponse?.getResponse()?.token!!)
     }

@@ -89,7 +89,6 @@ class SplashActivity : AppCompatActivity() {
     private fun startActivity() {
         if (getSharedBoolean(this, SHARED_PREFERENCE_USER_IS_LOGGED_KEY)) {
             AppConfigHelper.gotoActivityFinish(this, MainActivity::class.java, true)
-
         } else {
             AppConfigHelper.gotoActivityFinish(this, LoginActivity::class.java, true)
 

@@ -17,4 +17,5 @@
     <string name="enter_password">Please, Enter Your Password</string>
     <string name="enter_valid_data">Please,Enter a valid data</string>
     <string name="no_connection">Check your connection please</string>
+    <string name="Please_try_again_later">Error: Please try again later</string>
 </resources>

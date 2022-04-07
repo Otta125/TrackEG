@@ -1,8 +1,10 @@
 package com.trackeg.trackegapps.model.API
 
+import com.trackeg.trackegapps.model.data.login.ApiResponse
 import com.trackeg.trackegapps.model.data.login.LoginResponse
 import com.trackeg.trackegapps.model.data.login.User
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 
@@ -15,8 +17,10 @@ interface Api {
     ): Call<LoginResponse?>?    */
 
 
+    // I used "Response"-->Response<ApiResponse?>?  to use Coroutines and get success and error body
+    // suspend for Coroutines
     @POST("account/login")
-    fun userLogin(@Body body: User): Call<LoginResponse?>?
+    suspend fun userLogin(@Body body: User): Response<ApiResponse?>?
 
     @POST("account/login")
     fun addAccountGoogle(@Body body: User): Call<LoginResponse?>?

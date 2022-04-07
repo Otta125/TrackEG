@@ -17,6 +17,7 @@
     <string name="enter_password">Please, Enter Your Password</string>
     <string name="enter_valid_data">Please,Enter a valid data</string>
     <string name="no_connection">Check your connection please</string>
+    <string name="Please_try_again_later">Error: Please try again later</string>
     <!--        <string name="default_web_client_id" translatable="false">
                 410105365548-rt81bql10p5dafiupv4j3j7ljre3e08q.apps.googleusercontent.com</string>-->
 

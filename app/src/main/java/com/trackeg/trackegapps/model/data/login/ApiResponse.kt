@@ -1,34 +1,19 @@
 package com.trackeg.trackegapps.model.data.login
 
-class ApiResponse() {
-    var loginResponse: LoginResponse? = null
+import com.google.gson.annotations.SerializedName
 
-    private var error: Throwable? = null
-    var isLoading: Boolean? = false
+data class ApiResponse(
+    @SerializedName("status")
+    val status: Boolean,
+    @SerializedName("description")
+    val description: String,
+    @SerializedName("userId")
+    val userId: Int,
+    @SerializedName("roleId")
+    val roleId: Int,
+    @SerializedName("loginAccount")
+    val loginAccount: String,
+    @SerializedName("token")
+    val token: String
+)
 
-    fun getResponse(): LoginResponse? {
-        return loginResponse
-    }
-
-    fun setLoading(isLoading: Boolean) {
-        this.isLoading = isLoading
-    }
-
-    fun isLoading(): Boolean {
-        return isLoading!!
-    }
-
-    fun setlogin(loginResponse: LoginResponse?) {
-        this.loginResponse = loginResponse
-    }
-
-    fun getError(): Throwable? {
-        return error
-    }
-
-    fun setError(error: Throwable?) {
-        this.error = error
-    }
-
-
-}

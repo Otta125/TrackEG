@@ -3,10 +3,10 @@ package com.trackeg.trackegapps.UI.Login
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,17 +19,17 @@ import com.trackeg.trackegapps.R
 import com.trackeg.trackegapps.UI.ForgotPasswordActivity
 import com.trackeg.trackegapps.Utilities.AppConfigHelper
 import com.trackeg.trackegapps.Utilities.AppConfigHelper.Companion.gotoActivityFinish
-import com.trackeg.trackegapps.Utilities.Const.SHARED_PREFERENCE_USER_OBJECT_KEY
 import com.trackeg.trackegapps.Utilities.LoadingDialog
-import com.trackeg.trackegapps.Utilities.SharedPrefHelper
-import com.trackeg.trackegapps.model.data.login.ApiResponse
+import com.trackeg.trackegapps.other.Status
 import com.trackeg.trackegapps.viewmodel.LoginViewModel
 import com.trackeg.trackegapps.viewmodel.LoginWithGoogleViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_login.*
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
-    private var loginViewModel: LoginViewModel? = null
+    private val loginViewModel: LoginViewModel by viewModels()
     private var loginWithGoogleViewModel: LoginWithGoogleViewModel? = null
     private var loadingDialog: LoadingDialog? = null
     private lateinit var mGoogleSignInClient: GoogleSignInClient
@@ -51,11 +51,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        //initialize the loading dialog
         loadingDialog = LoadingDialog(this)
 
-        // Calling view model
-        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+       // loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         loginWithGoogleViewModel = ViewModelProvider(this).get(LoginWithGoogleViewModel::class.java)
 
         loginBtn?.setOnClickListener(View.OnClickListener {
@@ -73,74 +71,85 @@ class LoginActivity : AppCompatActivity() {
             AppConfigHelper.gotoActivityFinish(this, ForgotPasswordActivity::class.java, false)
         })
         //make observer on data changed
-        loginViewModel!!.loginMutableLiveData.observe(this,
-            Observer<ApiResponse> { apiResponse ->
-                if (apiResponse.isLoading()) {
-                    loadingDialog?.startLoadingDialog()
-                } else {
+        loginViewModel!!.loginMutableLiveData.observe(this, Observer {
+            when (it.status) {
+                Status.SUCCESS -> {
                     loadingDialog?.dissmissDialog()
+                    if (it.data?.status == true) {
+                        gotoActivityFinish(
+                            this,
+                            MainActivity::class.java,
+                            true
+                        )
+                    } else {
+                        Toast.makeText(
+                            this@LoginActivity,
+                            it.data?.description,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
 
-                if (apiResponse.getResponse()?.status!!) {
-                    //Start main activity
-                      gotoActivityFinish(this,
-                          MainActivity::class.java ,
-                          true)
-                } else {
-                    if (apiResponse.getResponse()?.description?.isNotEmpty()!!)
-
-                    Toast.makeText(
-                        this@LoginActivity,
-                        apiResponse.getResponse()?.description,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-            })
-        //observe data of login with google SDK
-        loginWithGoogleViewModel!!.loginGoogleMutableLiveData.observe(this,
-            Observer<GoogleSignInAccount> { googleSignInAccount ->
-                loadingDialog?.dissmissDialog()
-
-                if (googleSignInAccount != null) {
-                    //call server
-                    //start loading dialog
+                Status.LOADING -> {
                     loadingDialog?.startLoadingDialog()
-                    //call login function in viewModel
-                    loginWithGoogleViewModel!!.addAccountGoogle(
-                        emailTxt?.text.toString(),
-                        passwordTxt?.text.toString()
-                    )
-                } else {
-                    // handle error
-                }
-            })
-        //observe data of add account google API  SDK
-        loginWithGoogleViewModel!!.addAccountGoogleMutableLiveData.observe(this,
-            Observer<ApiResponse> { apiResponse ->
-                loadingDialog?.dissmissDialog()
-                if (apiResponse == null) {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        getString(R.string.try_again),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@Observer
-                }
-                if (apiResponse.getError() == null) {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        apiResponse.getResponse()?.description,
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    Toast.makeText(
-                        this@LoginActivity,
-                        apiResponse.getError()?.localizedMessage.toString(),
-                        Toast.LENGTH_SHORT
-                    ).show()
                 }
 
-            })
+                Status.ERROR -> {
+                    loadingDialog?.dissmissDialog()
+                    Toast.makeText(
+                        this@LoginActivity,
+                        it.message,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        })
+
+
+        //observe data of login with google SDK
+        /*      loginWithGoogleViewModel!!.loginGoogleMutableLiveData.observe(this,
+                  Observer<GoogleSignInAccount> { googleSignInAccount ->
+                      loadingDialog?.dissmissDialog()
+
+                      if (googleSignInAccount != null) {
+                          //call server
+                          //start loading dialog
+                          loadingDialog?.startLoadingDialog()
+                          //call login function in viewModel
+                          loginWithGoogleViewModel!!.addAccountGoogle(
+                              emailTxt?.text.toString(),
+                              passwordTxt?.text.toString()
+                          )
+                      } else {
+                          // handle error
+                      }
+                  })*/
+        //observe data of add account google API  SDK
+        /*  loginWithGoogleViewModel!!.addAccountGoogleMutableLiveData.observe(this,
+              Observer<ApiResponse> { apiResponse ->
+                  loadingDialog?.dissmissDialog()
+                  if (apiResponse == null) {
+                      Toast.makeText(
+                          this@LoginActivity,
+                          getString(R.string.try_again),
+                          Toast.LENGTH_SHORT
+                      ).show()
+                      return@Observer
+                  }
+                  if (apiResponse.getError() == null) {
+                      Toast.makeText(
+                          this@LoginActivity,
+                          apiResponse.getResponse()?.description,
+                          Toast.LENGTH_SHORT
+                      ).show()
+                  } else {
+                      Toast.makeText(
+                          this@LoginActivity,
+                          apiResponse.getError()?.localizedMessage.toString(),
+                          Toast.LENGTH_SHORT
+                      ).show()
+                  }
+
+              })*/
     }
 }
