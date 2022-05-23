@@ -1,42 +1,34 @@
-package com.trackeg.trackegapps.viewmodel
+package com.trackeg.trackegapps.Features.Login
 
 import android.app.Application
-import android.content.Context
-import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+
 import com.otherlogic.pregokotlin.API.RetrofitClient
 import com.trackeg.trackegapps.R
 import com.trackeg.trackegapps.Utilities.ConnectionDetector
-import com.trackeg.trackegapps.model.data.login.ApiResponse
-import com.trackeg.trackegapps.model.data.login.User
+import com.trackeg.core.login.ApiResponse
+import com.trackeg.core.login.User
 import com.trackeg.trackegapps.other.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel
 @Inject
- constructor(
+constructor(
     private val myApplicationContext: Application,
-    val loginMutableLiveData : MutableLiveData<Resource<ApiResponse>>
- ): AndroidViewModel(myApplicationContext) {
+    val loginMutableLiveData: MutableLiveData<Resource<ApiResponse>>
+) : AndroidViewModel(myApplicationContext) {
 
-    //val loginMutableLiveData: MutableLiveData<Resource<ApiResponse>> =MutableLiveData()
-    private var emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
-   // private  var myApplicationContext: Application =application
-
+   //  private var emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+".toRegex()
 
     fun login(userEmail: String, userPassword: String) {
         // check connection to internet
         if (ConnectionDetector.checkForInternet(myApplicationContext)) {
             // validate email & password
             if (validateLoginEmailAndPassword(userEmail, userPassword)) {
+                ////
                 viewModelScope.launch {
                     loginMutableLiveData.postValue(Resource.loading(null))
                     RetrofitClient.instance.userLogin(User(userEmail, userPassword)).let {

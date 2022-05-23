@@ -1,4 +1,4 @@
-package com.trackeg.trackegapps.UI
+package com.trackeg.trackegapps.Features.Splash
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
@@ -11,7 +11,7 @@ import android.view.View
 import androidx.core.os.ConfigurationCompat
 import com.trackeg.trackegapps.MainActivity
 import com.trackeg.trackegapps.R
-import com.trackeg.trackegapps.UI.Login.LoginActivity
+import com.trackeg.trackegapps.Features.Login.LoginActivity
 import com.trackeg.trackegapps.Utilities.AppConfigHelper
 import com.trackeg.trackegapps.Utilities.AppConfigHelper.Companion.isValid
 import com.trackeg.trackegapps.Utilities.Const.ARABIC_LANGUAGE

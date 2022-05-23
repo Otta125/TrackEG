@@ -1,5 +1,5 @@
 package com.otherlogic.pregokotlin.API
-import com.trackeg.trackegapps.model.API.Api
+import com.trackeg.trackegapps.API.Api
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

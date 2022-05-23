@@ -1,9 +1,8 @@
-package com.trackeg.trackegapps.model.data.login
+package com.trackeg.core.login
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginResponse(
-
+data class ApiResponse(
     @SerializedName("status")
     val status: Boolean,
     @SerializedName("description")
@@ -17,3 +16,4 @@ data class LoginResponse(
     @SerializedName("token")
     val token: String
 )
+

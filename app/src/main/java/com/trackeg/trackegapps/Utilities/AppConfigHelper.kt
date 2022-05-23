@@ -7,9 +7,7 @@ import android.graphics.Point
 import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
-import com.trackeg.trackegapps.UI.Login.LoginActivity
 
 class AppConfigHelper {
     companion object {

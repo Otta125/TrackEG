@@ -1,10 +1,9 @@
 package com.trackeg.trackegapps.DI
 
 import androidx.lifecycle.MutableLiveData
-import com.trackeg.trackegapps.model.data.login.ApiResponse
+import com.trackeg.core.login.ApiResponse
 import com.trackeg.trackegapps.other.MyApplication
 import com.trackeg.trackegapps.other.Resource
-import com.trackeg.trackegapps.viewmodel.LoginViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

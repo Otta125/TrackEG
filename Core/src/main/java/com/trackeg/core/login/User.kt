@@ -1,4 +1,4 @@
-package com.trackeg.trackegapps.model.data.login
+package com.trackeg.core.login
 
 data class User(val LoginAccount: String, val Password: String)
 

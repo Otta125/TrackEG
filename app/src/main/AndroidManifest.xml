@@ -14,11 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".UI.ForgotPasswordActivity"
+            android:name=".Features.ForgotPassword.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".UI.SplashActivity"
+            android:name=".Features.Splash.SplashActivity"
             android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".Features.Login.LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,13 +31,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".UI.Login.LoginActivity"
-            android:exported="true">
+            android:name=".MainActivity"
+            android:exported="true" >
 
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
     </application>
 
 </manifest>

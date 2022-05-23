@@ -13,14 +13,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-import com.otherlogic.pregokotlin.API.RetrofitClient
-import com.trackeg.trackegapps.R
-import com.trackeg.trackegapps.model.data.login.ApiResponse
-import com.trackeg.trackegapps.model.data.login.LoginResponse
-import com.trackeg.trackegapps.model.data.login.User
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.trackeg.core.login.ApiResponse
 
 class LoginWithGoogleViewModel : ViewModel() {
     var loginGoogleMutableLiveData: MutableLiveData<GoogleSignInAccount> = MutableLiveData()
@@ -32,7 +25,7 @@ class LoginWithGoogleViewModel : ViewModel() {
 
     fun loginWithGoogle(activity: Activity) {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(activity.getString(R.string.default_web_client_id))
+          //  .requestIdToken(activity.getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
         mGoogleSignInClient = GoogleSignIn.getClient(activity, gso)

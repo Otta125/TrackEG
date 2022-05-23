@@ -2,6 +2,7 @@ package com.trackeg.trackegapps.Utilities
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.util.Log
 import android.view.LayoutInflater
 import com.trackeg.trackegapps.R
 
@@ -14,6 +15,7 @@ class LoadingDialog constructor(activity: Activity) {
     }
 
     fun startLoadingDialog() {
+        Log.e("LOOAD","StartLoading")
         var builder: AlertDialog.Builder = AlertDialog.Builder(activity, R.style.TransparentDialog)
         var inflator: LayoutInflater? = activity?.layoutInflater
         builder.setView(inflator?.inflate(R.layout.custom_loading_dialog, null))
@@ -23,6 +25,8 @@ class LoadingDialog constructor(activity: Activity) {
     }
 
     fun dissmissDialog() {
+        Log.e("LOOAD","DissmissLoading")
+
         dialog?.dismiss()
     }
 

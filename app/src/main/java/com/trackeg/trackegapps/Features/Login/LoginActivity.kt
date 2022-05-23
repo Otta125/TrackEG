@@ -1,4 +1,4 @@
-package com.trackeg.trackegapps.UI.Login
+package com.trackeg.trackegapps.Features.Login
 
 import android.app.Activity
 import android.content.Intent
@@ -16,19 +16,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.tasks.Task
 import com.trackeg.trackegapps.MainActivity
 import com.trackeg.trackegapps.R
-import com.trackeg.trackegapps.UI.ForgotPasswordActivity
-import com.trackeg.trackegapps.Utilities.AppConfigHelper
+import com.trackeg.trackegapps.Features.ForgotPassword.ForgotPasswordActivity
 import com.trackeg.trackegapps.Utilities.AppConfigHelper.Companion.gotoActivityFinish
 import com.trackeg.trackegapps.Utilities.LoadingDialog
+import com.trackeg.trackegapps.databinding.ActivityLoginBinding
 import com.trackeg.trackegapps.other.Status
-import com.trackeg.trackegapps.viewmodel.LoginViewModel
 import com.trackeg.trackegapps.viewmodel.LoginWithGoogleViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_login.*
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivityLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
     private var loginWithGoogleViewModel: LoginWithGoogleViewModel? = null
     private var loadingDialog: LoadingDialog? = null
@@ -49,26 +47,30 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         loadingDialog = LoadingDialog(this)
 
-       // loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         loginWithGoogleViewModel = ViewModelProvider(this).get(LoginWithGoogleViewModel::class.java)
 
-        loginBtn?.setOnClickListener(View.OnClickListener {
-            loginViewModel!!.login(emailTxt?.text.toString(), passwordTxt?.text.toString())
+        binding.loginBtn?.setOnClickListener(View.OnClickListener {
+            loginViewModel!!.login(
+                binding.emailTxt?.text.toString(),
+                binding.passwordTxt?.text.toString()
+            )
         })
 
-        loginGoogleLin?.setOnClickListener(View.OnClickListener {
+        binding.loginGoogleLin?.setOnClickListener(View.OnClickListener {
             loginWithGoogleViewModel!!.loginWithGoogle(this)
             // start Intent for result from google SDK
             val signInIntent: Intent = loginWithGoogleViewModel!!.mGoogleSignInClient.signInIntent
             resultLauncher.launch(signInIntent)
         })
 
-        forgotPasswordTxt?.setOnClickListener(View.OnClickListener {
-            AppConfigHelper.gotoActivityFinish(this, ForgotPasswordActivity::class.java, false)
+        binding.forgotPasswordTxt?.setOnClickListener(View.OnClickListener {
+            gotoActivityFinish(this, ForgotPasswordActivity::class.java, false)
         })
         //make observer on data changed
         loginViewModel!!.loginMutableLiveData.observe(this, Observer {

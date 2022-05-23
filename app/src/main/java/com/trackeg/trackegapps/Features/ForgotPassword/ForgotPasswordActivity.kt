@@ -1,4 +1,4 @@
-package com.trackeg.trackegapps.UI
+package com.trackeg.trackegapps.Features.ForgotPassword
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

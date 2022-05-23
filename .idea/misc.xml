@@ -8,7 +8,7 @@
         <entry key="app/src/main/res/drawable/frame_for_email_edittxt.xml" value="0.1545" />
         <entry key="app/src/main/res/drawable/login_btn_shape.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.17407407407407408" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.16204833984375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.203125" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1824074074074074" />
         <entry key="app/src/main/res/layout/custom_loading_dialog.xml" value="0.10280797101449275" />

@@ -1,8 +1,8 @@
-package com.trackeg.trackegapps.model.API
+package com.trackeg.trackegapps.API
 
-import com.trackeg.trackegapps.model.data.login.ApiResponse
-import com.trackeg.trackegapps.model.data.login.LoginResponse
-import com.trackeg.trackegapps.model.data.login.User
+import com.trackeg.core.login.ApiResponse
+import com.trackeg.core.login.LoginResponse
+import com.trackeg.core.login.User
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
